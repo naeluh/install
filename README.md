@@ -1,14 +1,14 @@
 # install
 
-OpenCV_DIR="/mnt/z/torch-opencv/opencv/cmake/templates" luarocks install cv
+	OpenCV_DIR="/mnt/z/torch-opencv/opencv/cmake/templates" luarocks install cv
 
-Z:\torch-opencv
+	Z:\torch-opencv
 
 ----------------------------------
 
-th neural_style.lua -gpu -1 -style_image convergence.jpg -content_image a.JPG
+	th neural_style.lua -gpu -1 -style_image convergence.jpg -content_image a.JPG
 
-wget http://developer.download.nvidia.com/compute/cuda/7_5/Prod/local_installers/rpmdeb/cuda-repo-ubuntu1404-7-5-local_7.5-28_amd64.deb
+	wget http://developer.download.nvidia.com/compute/cuda/7_5/Prod/local_installers/rpmdeb/cuda-repo-ubuntu1404-7-5-local_7.5-28_amd64.deb
 
 -------------------------------
 
@@ -23,35 +23,35 @@ The following packages have unmet dependencies:
                                 opencl-dev
 E: Unable to correct problems, you have held broken packages.
 
-sudo apt-get install ocl-icd-opencl-dev
+	sudo apt-get install ocl-icd-opencl-dev
 
 
 -----------------------
 
 
 
-luarocks install cutorch
-luarocks install cunn
+	luarocks install cutorch
+	luarocks install cunn
 
 
 Then this works
 
-export PATH=/usr/local/cuda-7.0/bin:$PATH 
-source ~/.bashrc
+	export PATH=/usr/local/cuda-7.0/bin:$PATH 
+	source ~/.bashrc
 
 To install onlder cunn for lua 
 
-luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/R4/cudnn-scm-1.rockspec
+	luarocks install https://raw.githubusercontent.com/soumith/cudnn.torch/R4/cudnn-scm-1.rockspec
 
-export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
-source ~/.bashrc
+	export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
+	source ~/.bashrc
 
 ------
 
 Make for open cv
 
 
-cmake -D CMAKE_BUILD_TYPE=RELEASE \
+	cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D CMAKE_INSTALL_PREFIX=/usr/local \
 	-D INSTALL_C_EXAMPLES=OFF \
 	-D INSTALL_PYTHON_EXAMPLES=ON \
@@ -59,7 +59,7 @@ cmake -D CMAKE_BUILD_TYPE=RELEASE \
 	-D BUILD_EXAMPLES=ON ..
 
 
-cmake -D CUDA_ARCH_BIN=3.2 \
+	cmake -D CUDA_ARCH_BIN=3.2 \
     -D CUDA_ARCH_PTX=3.2 \
     -D CMAKE_BUILD_TYPE=RELEASE \
     -D CMAKE_INSTALL_PREFIX=/usr/local \
@@ -83,34 +83,34 @@ cmake -D CUDA_ARCH_BIN=3.2 \
 
 	=-----------------------
 
-	The installation of CUDA is little a bit tricky. I've followed the following steps and it works for me. You can refer to this link also.
+The installation of CUDA is little a bit tricky. I've followed the following steps and it works for me. You can refer to this link also.
 
 Confirmation of the environment –
 
-lspci | grep -i nvidia (Confirm that the information of NVIDIA's board is displayed)
-uname -m (make sure that it is a x86_64)
-gcc --version (make sure it is installed)
+	lspci | grep -i nvidia (Confirm that the information of NVIDIA's board is displayed)
+	uname -m (make sure that it is a x86_64)
+	gcc --version (make sure it is installed)
 Installation of CUDA –
 
 Download cuda_7.5.18_linux.run file from https://developer.nvidia.com/cuda-downloads
 Run the following command –
 
-a. sudo apt-get install build-essential
+	a. sudo apt-get install build-essential
 
-b. sudo vi /etc/modprobe.d/blacklist-nouveau.conf
+	b. sudo vi /etc/modprobe.d/blacklist-nouveau.conf
 
-c. Then, add the following line in that file: blacklist nouveau option nouveau modeset=0
+	c. Then, add the following line in that file: blacklist nouveau option nouveau modeset=0
 
-d. sudo update-initramfs -u
+	d. sudo update-initramfs -u
 Reboot computer
 At login screen, press Ctrl+Alt+F1and login to your user.
 Go to the directory where you have the CUDA driver, and run
 
-a. chmod a+x .
+	a. chmod a+x .
 
-b. sudo service lightdm stop
+	b. sudo service lightdm stop
 
-c. sudo bash cuda-7.5.18_linux.run --no-opengl-libs
+	c. sudo bash cuda-7.5.18_linux.run --no-opengl-libs
 During the install –
 
 a. Accept EULA conditions
@@ -124,43 +124,43 @@ d. Say YES to installing CUDA Samples
 e. Say NO rebuilding any Xserver configurations with Nvidia
 Check if /dev/nvidia* files exist. If they don't, do the following –
 
-a. sudo modprobe nvidia
+	a. sudo modprobe nvidia
 Set Environment path variables –
 
-a. export PATH=/usr/local/cuda-7.0/bin:$PATH
+	a. export PATH=/usr/local/cuda-7.0/bin:$PATH
 
-b. export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
+	b. export LD_LIBRARY_PATH=/usr/local/cuda-7.0/lib64:$LD_LIBRARY_PATH
 
-source ~/.bashrc
+	source ~/.bashrc
 
 Verify the driver version –
 
-a. cat /proc/driver/nvidia/version
+	a. cat /proc/driver/nvidia/version
 Check CUDA driver version
 
-a. nvcc –V
+	a. nvcc –V
 Switch the lightdm back on again
 
-a. sudo service lightdm start
+	a. sudo service lightdm start
 Ctrl+Alt+F7 and login to the system through GUI
 Create CUDA Samples –
 
-a. Go to NVIDIA_CUDA-7.5_Samples folder through terminal
+	a. Go to NVIDIA_CUDA-7.5_Samples folder through terminal
 
-b. make
+	b. make
 
-c. cd bin/x86_64/linux/release/
+	c. cd bin/x86_64/linux/release/
 
-d. ./deviceQuery
+	d. ./deviceQuery
 
-e. ./bandwidthTest
+	e. ./bandwidthTest
 
 f. Both tests should ultimately output a 'PASS' in terminal
 Reboot the system
 
 
 
-th neural_style.lua -gpu 0 -print_iter 1 -backend nn -optimizer adam
+	th neural_style.lua -gpu 0 -print_iter 1 -backend nn -optimizer adam
 
 
 ---------------------------------------------
@@ -176,7 +176,7 @@ These steps would work on Ubuntu and close derivatives like Xubuntu, Kubuntu, Lu
 1. Find out your graphics card model
 Use the lspci command to find out the model of your graphics card
 
-$ lspci -vnn | grep -i VGA -A 12
+	$ lspci -vnn | grep -i VGA -A 12
 01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GT218 [GeForce 210] [10de:0a65] (rev a2) (prog-if 00 [VGA controller])
         Subsystem: ASUSTeK Computer Inc. Device [1043:8416]
 Here its GeForce 210
@@ -190,21 +190,21 @@ For the above GeForce 210 card, it showed 331.67 as the correct driver which can
 3. Setup the xorg-edgers ppa
 The xorg-edgers ppa provides the very latest nvidia drivers. Run the following commands to set it up.
 
-$ sudo add-apt-repository ppa:xorg-edgers/ppa -y
-$ sudo apt-get update
+	$ sudo add-apt-repository ppa:xorg-edgers/ppa -y
+	$ sudo apt-get update
 Now the ppa is setup and the package information is also updated.
 
 4. Install the driver
 Either you can install the driver directly by installing a single package containing "nvidia" and the major version number ( 173, 304, 310, 313, 319, 331, 334 or 337).
 
 # 331 driver
-$ sudo apt-get install nvidia-331
+	$ sudo apt-get install nvidia-331
 
 # 334 driver
-$ sudo apt-get install nvidia-334
+	$ sudo apt-get install nvidia-334
 
 # install the latest version
-$ sudo apt-get install nvidia-current
+	$ sudo apt-get install nvidia-current
 Or you can enable it from the "Additional Drivers" section. This is different on different Ubuntu flavors.
 
 Synaptic package manager
@@ -212,7 +212,7 @@ Synaptic package manager
 If you have synaptic package manager installed, then go to Settings > Repositories > Additional Drivers tab and select the correct nvidia driver, and click Apply changes.
 
 # or launch it from command line
-$ sudo software-properties-gtk
+	$ sudo software-properties-gtk
 ubuntu software updates nvidia
 Ubuntu
 
@@ -231,7 +231,7 @@ After the installation is complete, reboot the system. You should see an option 
 5. Verify the installation
 The last thing to do is verify that the nvidia drivers are loaded and working. Run the lspci command again and this time the kernel driver should show nvidia
 
-$ lspci -vnn | grep -i VGA -A 12
+	$ lspci -vnn | grep -i VGA -A 12
 01:00.0 VGA compatible controller [0300]: NVIDIA Corporation GT218 [GeForce 210] [10de:0a65] (rev a2) (prog-if 00 [VGA controller])
         Subsystem: ASUSTeK Computer Inc. Device [1043:8416]
         Flags: bus master, fast devsel, latency 0, IRQ 46
@@ -244,7 +244,7 @@ $ lspci -vnn | grep -i VGA -A 12
         Kernel driver in use: nvidia
 Check the last line which says "kernel driver in use: nvidia". This shows that nvidia drivers are now in action. Also check hardware acceleration with the glxinfo command
 
-$ glxinfo | grep OpenGL | grep renderer
+	$ glxinfo | grep OpenGL | grep renderer
 OpenGL renderer string: GeForce 210/PCIe/SSE2
 The OpenGL renderer string should be anything other than "MESA". Then it indicates that the hardware drivers are being used for hardware acceleration.
 
@@ -260,7 +260,7 @@ Incase anything goes wrong after the installation, like you are not able to boot
 Boot into the recovery console from the grub menu and then issue the following commands
 
 # remount root file system as writable
-$ mount -o remount,rw /
+	$ mount -o remount,rw /
 
 # remove all nvidia packages
 $ apt-get purge nvidia*
